@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import init, { add } from "wasm-lib";
 
 function App() {
+  const [ans, setAns] = useState(0);
+  useEffect(() => {
+      init().then(() => {
+        setAns(add(1, 1));
+      })
+  }, [])
   return (
     <div className="App">
       <header className="App-header">
@@ -10,14 +17,8 @@ function App() {
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <p>1 + 1 = {ans}</p>
+        rust is running
       </header>
     </div>
   );
